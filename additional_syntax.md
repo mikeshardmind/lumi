@@ -13,3 +13,4 @@ Currently planned:
 - Derived numerical types and refinement types
 - Differing overload behavior (see doc on overloads)
 - Guard clauses
+- None aware operations (will expand to python code that short circuits on None)
