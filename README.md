@@ -44,14 +44,10 @@ cooperation with those involved as members of CPython.
 
 ## Secondary Goals
 
-- Providing type information should allow emitting optimized compiled modules
+- Providing type information should allow emitting optimized compiled modules.
+- Provide additional syntax supporting the type system.
 
 ## Non-goals
 
 - Making all valid python code possible to type.
 - Upstream this (At least at this point in time.)
-
-
-## Using untyped code from lumi
-
-TODO: details on both defaulting to safe wrapping of boundaries and external type specifications

@@ -44,3 +44,101 @@ Examples: `VarArgsReturnList` and `ReturnedHeterogenousList` (planned)
 - Lumi allows describing Lumi code with `VarArgsReturnList` but not with `ReturnedHeterogenousList`, the latter exists only for describing existing CPython code. The former must be a "what went in went back out"
 
 This is a common occurance in various Cpython apis and libraries. The best example of this is `asyncio.gather`
+
+
+## Copied from discord, needs formatting and explanations (TODO)
+
+builtins:
+
+Pure logic
+-----------
+abs()
+all()
+any()
+bin()
+bool()
+chr()
+divmod()
+enumerate()
+filter()
+format()
+hex()
+len()
+map()
+max()
+min()
+oct()
+ord()
+pow()
+reversed()
+round()
+sum()
+zip()
+
+
+Should be fine
+---------------
+aiter()
+anext()
+ascii()
+classmethod()
+dir()
+globals()
+hash()
+id()
+input()
+iter()
+locals()
+next()
+print()
+property()
+range()
+repr()
+slice()
+sorted()
+staticmethod()
+str()
+vars()
+
+Unchanged (for now) Data types
+--------------------
+bytearray()
+bytes()
+callable()
+dict()
+frozenset()
+int()
+list()
+memoryview()
+object()
+set()
+tuple()
+complex()
+
+Modified builtins
+-----------------------
+
+
+float()  -> numpy.float64 (for now, temp hack), float literals replaced with numpy.float64("literal")
+isinstance()
+issubclass()
+
+type()  (single parameter only)
+open()  (mode parameter changes, not yet implemented)
+
+Removed builtins
+----------------
+compile()
+delattr()
+eval()
+exec()
+help()
+
+Temp removed builtins
+---------------------
+breakpoint()
+super()
+__import__()
+getattr()
+setattr()
+hasattr()
