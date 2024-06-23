@@ -14,3 +14,7 @@ Currently planned:
 - Differing overload behavior (see doc on overloads)
 - Guard clauses
 - None aware operations (will expand to python code that short circuits on None)
+
+Needs further consideration:
+- Late bound function defaults (will still generate a sentinel, but allows ensuring the
+  type system checks that you removed the generated sentinel by not having this exist in your code)
