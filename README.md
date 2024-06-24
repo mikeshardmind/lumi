@@ -33,6 +33,23 @@ what exists in python that does not seem possible to resolve by
 cooperation with those involved as members of CPython.
 
 
+### A measured followup to the above
+
+Many of the issues with python's type system are old, or in some cases even
+predate the type system. A
+BC registration, python's float behavior, and a few others apply here.
+
+Many further issues with python's type system are deep seated and would have
+excessive costs to fix to existing code bases.
+
+Some of them are just really hard problems that even other languages with a
+focus on soundness have gotten wrong or partially wrong before (variance)
+
+There are tradeoffs that have to be considered when making decisions at the
+language level, and right now, the balance on some of these issues has been
+to keep certain kinds of unsoundness in favor of stability of existing systems.
+
+
 ## Primary Goals
 
 - Typed code is checked for type safety.
