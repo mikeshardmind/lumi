@@ -22,6 +22,45 @@ lumi replaces isinstance with a type-safe implementation that tracks certain thi
 - While Lumi allows *accepting* a a gradual type, a function defined in Lumi may not return a gradual type.
 - Lumi has directives for allowing safe, checked use to be generated when partially applying functions recieved from python
 
+### Never
+
+- Lumi has multiple concepts of Never. While Never should always indicate a lack of a return, Lumi differentiates between reasons for that. This allows Lumi to determine when functions are suitable replacements in subclasses.
+
+For instance, a function that loops forever, and requires external intervention to break out of to run a runtime is different from a function that will only ever error.
+
+These are represented as `Never[Error]` and `Never[InfiniteLoop]`
+
+There is also `Never[Logical]` to represent `Never` which arises from logical conclusions,
+such as with exhaustive case matching.
+
+Never is not generic over specific exceptions.
+
+Generated Python code will re-reduce all special kinds of Never to just `Never`, as this is not a concept python's type system supports.
+
+- Never is not considered a valid subtype of concrete types. This prevents a case where subclassing is "trivially" allowed by just causing methods with no reasonable implementation to error
+
+The pathological case this prevents:
+
+```py
+class A:
+    def foo(self) -> Literal[1]:
+      return 1
+
+class B:
+  def foo(self) -> Literal["this"]:
+    return "this"
+
+
+class C(A, B):
+  def foo(self) -> Never:
+    raise RuntimeError()
+```
+
+A strict interpretation of subtyping without accounting for the concept that
+subtypes should remain compatible from the perspective of intent to use the method would allow
+C to have a foo that isn't a suitable replacement for either A or B, let alone both.
+
+
 ### Structural types
 
 - Lumi does not allow structural types as return types
