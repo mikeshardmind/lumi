@@ -22,6 +22,22 @@ lumi replaces isinstance with a type-safe implementation that tracks certain thi
 - While Lumi allows *accepting* a a gradual type, a function defined in Lumi may not return a gradual type.
 - Lumi has directives for allowing safe, checked use to be generated when partially applying functions recieved from python
 
+### Structural types
+
+- Lumi does not allow structural types as return types
+- Lumi does allow type variables bound to structural types as return types
+- Structural types do not have their own variance.
+  Variance is checked as if the static type qualifying
+  as having that structure would have appropriate variance.
+
+### ABCs, and other means of lying about subtyping
+
+- Lumi does not support python ABCs or the ABC.register method from Lumi code.
+  Lumi *will* emit use of some collections.abc.register methods to allow interoperability
+  with existing python code.
+- Lumi does not allow implementing `__instancecheck__` or `__subclasscheck__`
+
+
 ### builtins
 
 - Some python builtins will be replaced by default in Lumi.
@@ -134,7 +150,7 @@ eval()
 exec()
 help()
 
-Temp removed builtins
+Temp(?) removed builtins
 ---------------------
 breakpoint()
 super()

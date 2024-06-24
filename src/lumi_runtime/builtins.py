@@ -29,18 +29,25 @@ excluded_type_map: Mapping[builtins.type, Sequence[builtins.type]] = {}
 def isinstance(obj: object, typeinfo: _clstype) -> bool:
     return issubclass(type(obj), typeinfo)
 
-# TODO: structural type support
 # We don't allow abc.ABC.register use and bypass `__instancecheck__` and `__subclasscheck__`
 @lru_cache(512)
 def issubclass(cls: builtins.type, typeinfo: _clstype, /) -> bool:
-    excluded = excluded_type_map.get(cls, ())
 
-    if builtins.isinstance(typeinfo, tuple):
-        for typ in typeinfo:
-            if typ not in excluded:
-                if typ in (cls, *cls.__bases__):
-                     return True
-    elif typeinfo not in excluded:
-        return typeinfo in (cls, *cls.__bases__)
+
+    if not builtins.isinstance(typeinfo, tuple):
+        excluded = excluded_type_map.get(typeinfo, ())
+        if cls in excluded:
+            return False
+        if cls is typeinfo:
+            return True
+        for base_type in cls.__bases__:
+            if base_type not in excluded:
+                if issubclass(base_type, typeinfo):
+                    return True
+
+    else:
+        for possible_parent in typeinfo:
+            if issubclass(cls, possible_parent):
+                return True
 
     return False
