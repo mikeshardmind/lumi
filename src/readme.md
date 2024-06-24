@@ -14,3 +14,11 @@ Where possible, they are defined in such a way that the existing
 *specification compliant* type system will understand them,
 but this is done on a "best effort" basis. Use of `Any` is prefered
 for cases where python's type system cannot understand.
+
+### types.py
+
+python implementation of Lumi provided additional types
+
+### exceptions.py
+
+exceptions raised by lumi generated code

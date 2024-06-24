@@ -5,3 +5,10 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 Copyright (C) 2024 Michael Hall <https://github.com/mikeshardmind>
 """
+
+from __future__ import annotations
+
+
+class FrozenRecordError(AttributeError):
+    """Raised when attempting to modify a Lumi record type that was frozen"""
+    pass
