@@ -41,11 +41,12 @@ cooperation with those involved as members of CPython.
 - Replace python's type system with an external one.
 - Provide a few additional implemented base types
 - For it to be easy to write the correct type.
+- Provide additional syntax supporting the ideas that enable people to write type safe code with less effort.
 
-## Secondary Goals
+## Long term goals
 
 - Providing type information should allow emitting optimized compiled modules.
-- Provide additional syntax supporting the ideas that enable people to write type safe code with less effort.
+- Pure Lumi code should be possible to emit a binary which does not require the python runtime.
 
 ## Non-goals
 

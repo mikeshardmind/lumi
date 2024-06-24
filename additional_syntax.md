@@ -10,11 +10,9 @@ Currently planned:
 
 - Efficient Data only structs
 - ADTs
-- Derived numerical types and refinement types
-- Differing overload behavior (see doc on overloads)
+- Derived numerical types and refinement types (see numerics.md)
+- Differing overload behavior (see overloads.md)
 - Guard clauses
 - None aware operations (will expand to python code that short circuits on None)
-
-Needs further consideration:
 - Late bound function defaults (will still generate a sentinel, but allows ensuring the
   type system checks that you removed the generated sentinel by not having this exist in your code)
