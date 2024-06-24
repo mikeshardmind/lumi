@@ -45,7 +45,7 @@ cooperation with those involved as members of CPython.
 ## Secondary Goals
 
 - Providing type information should allow emitting optimized compiled modules.
-- Provide additional syntax supporting the type system.
+- Provide additional syntax supporting the ideas that enable people to write type safe code with less effort.
 
 ## Non-goals
 
