@@ -36,8 +36,8 @@ cooperation with those involved as members of CPython.
 ### A measured followup to the above
 
 Many of the issues with python's type system are old, or in some cases even
-predate the type system. A
-BC registration, python's float behavior, and a few others apply here.
+predate the type system. ABC registration, python's float behavior,
+and a few others apply here.
 
 Many further issues with python's type system are deep seated and would have
 excessive costs to fix to existing code bases.
