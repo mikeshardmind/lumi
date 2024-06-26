@@ -26,20 +26,11 @@ lumi replaces isinstance with a type-safe implementation that tracks certain thi
 
 - Lumi has multiple concepts of Never. While Never should always indicate a lack of a return, Lumi differentiates between reasons for that. This allows Lumi to determine when functions are suitable replacements in subclasses.
 
-For instance, a function that loops forever, and requires external intervention to break out of to run a runtime is different from a function that will only ever error.
-
-These are represented as `Never[Error]` and `Never[InfiniteLoop]`
-
-There is also `Never[Logical]` to represent `Never` which arises from logical conclusions,
-such as with exhaustive case matching.
-
 Never is not generic over specific exceptions.
 
 Generated Python code will re-reduce all special kinds of Never to just `Never`, as this is not a concept python's type system supports.
 
-- Never is not considered a valid subtype of concrete types. This prevents a case where subclassing is "trivially" allowed by just causing methods with no reasonable implementation to error
-
-The pathological case this prevents:
+The pathological case this prevents is below, see the section on Never in the theory overview for more details.
 
 ```py
 class A:

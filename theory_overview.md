@@ -45,13 +45,12 @@ As such, given an annotation : `T`, Lumi understands this as `T | Never[Error]`
 
 ### Why `Never[Error]` exists, and why and how Lumi has multuple understandings of `Never`
 
-Lumi has 3 kinds of "Never" categorized by a partially encoded understanding of
+Lumi has multiple kinds of "Never" categorized by a partially encoded understanding of
 algebraic effects.
 
 These are
 
 - `Never[Logical]`
-- `Never[InfiniteLoop]`
 - `Never[Error]`
 
 Of these, `Never[Error]` is implicitly always possible when targeting the CPython
@@ -65,8 +64,3 @@ may explicitly mark functions that always raise with this return type.
 `Never[Logical]` is the logical abscence of a valid type, usually by exhaustive narrowing
 `Never[Logical]` *is not* valid as a return type in Lumi as it is impossible to return a non-existant value.
 `Never[Logical]` *is* a subtype of all concrete types.
-
-`Never[InfiniteLoop]` is a special indication that this function will never return
-and continue running infinitely under normal circumstances.
-If it is possible to gracefully shutdown this infinite loop,
-and have it return rather than raise, this is not the correct type.
