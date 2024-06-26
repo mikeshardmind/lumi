@@ -8,7 +8,7 @@ and a partial inclusion of support for algebraic effects.
 Lumi *may* at some much later date gain support for generalized algebraic effects.
 
 
-## Subtyping
+### Subtyping
 
 1. Subtyping follows from the set-theoretic rules. (TODO: longer doucmentation in a non-overview)
 2. It is an error to declare nominal subtypes which violate concetps of safe substitution (TODO: define safe substitution)
@@ -31,7 +31,6 @@ each of the following python Exceptions. (N.B. This may not be an exhaustive lis
 - KeyboardInterrupt
 - OverflowError
 - ZeroDivisionError
-- BufferError
 - LookupError
 - ImportError
 - NotImplementedError
@@ -44,30 +43,30 @@ While exceptions are not checked and you are not required to catch all possible 
 
 As such, given an annotation : `T`, Lumi understands this as `T | Never[Error]`
 
-### Never[Error]? Lumi has multiple Never
+### Why `Never[Error]` exists, and why and how Lumi has multuple understandings of `Never`
 
 Lumi has 3 kinds of "Never" categorized by a partially encoded understanding of
 algebraic effects.
 
 These are
 
-- Never[Logical]
-- Never[InfiniteLoop]
-- Never[Error]
+- `Never[Logical]`
+- `Never[InfiniteLoop]`
+- `Never[Error]`
 
-Of these, Never[Error] is implicitly always possible when targeting the CPython
+Of these, `Never[Error]` is implicitly always possible when targeting the CPython
 runtime (Note: currently this is the only target)
 
-Never[Error] is not considered to be a subtype of any runtime type,
+`Never[Error]` is not considered to be a subtype of any runtime type,
 and is essentially the effect of raising an exception.
 While this is always implicitly possible, you
 may explicitly mark functions that always raise with this return type.
 
-Never[Logical] is the logical abscence of a valid type, usually by exhaustive narrowing
-Never[Logical] *is not* valid as a return type in Lumi as it is impossible to return a non-existant value.
-Never[Logical] *is* a subtype of all concrete types.
+`Never[Logical]` is the logical abscence of a valid type, usually by exhaustive narrowing
+`Never[Logical]` *is not* valid as a return type in Lumi as it is impossible to return a non-existant value.
+`Never[Logical]` *is* a subtype of all concrete types.
 
-Never[InfiniteLoop] is a special indication that this function will never return
+`Never[InfiniteLoop]` is a special indication that this function will never return
 and continue running infinitely under normal circumstances.
 If it is possible to gracefully shutdown this infinite loop,
 and have it return rather than raise, this is not the correct type.
