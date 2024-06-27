@@ -36,7 +36,6 @@ def filter_users_by_permissions(users: list[User] => [], permissions: Bitfield =
 Should generate python that looks like:
 
 ```py
-import reprlib
 from typing import Generator, Any, Never
 
 from lumi.types import uint64, MISSING
@@ -58,10 +57,10 @@ class User:
         object.__setattr__(self, "role", role)
 
     def __setattr__(self, name: str, value: Any) -> Never:
-        raise FrozenRecordError("Cannot assign to field {name}")
+        raise FrozenRecordError(f"Cannot assign to field {name}")
 
     def __delattr__(self, name: str) -> Never:
-        raise FrozenRecordError("Cannot delete field {name}")
+        raise FrozenRecordError(f"Cannot delete field {name}")
 
     def __repr__(self) -> str:
         return f"<User Record Type: id = {self.id!r}>"

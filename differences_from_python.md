@@ -94,10 +94,8 @@ This is a common occurance in various Cpython apis and libraries. The best examp
 
 ## Copied from discord, needs formatting and explanations (TODO)
 
-builtins:
-
-Pure logic
------------
+builtins to keep:
+```
 abs()
 all()
 any()
@@ -120,10 +118,6 @@ reversed()
 round()
 sum()
 zip()
-
-
-Should be fine
----------------
 aiter()
 anext()
 ascii()
@@ -153,38 +147,39 @@ bytes()
 callable()
 dict()
 frozenset()
-int()
 list()
 memoryview()
 object()
 set()
 tuple()
 complex()
-
+```
 Modified builtins
------------------------
+```
 
-
+int() -> int subclass
 float()  -> numpy.float64 (for now, temp hack), float literals replaced with numpy.float64("literal")
 isinstance()
 issubclass()
-
-type()  (single parameter only)
+type()  (single parameter only when used as a function)
 open()  (mode parameter changes, not yet implemented)
+```
 
-Removed builtins
-----------------
+Removed Builtins:
+```
 compile()
 delattr()
+getattr()
+setattr()
 eval()
 exec()
 help()
+```
 
 Temp(?) removed builtins
----------------------
+```
 breakpoint()
 super()
 __import__()
-getattr()
-setattr()
 hasattr()
+```
