@@ -42,7 +42,7 @@ In general, at least one of LHS, RHS, or the resulting type needs to be
 determinable if the result of the operator use would impact the return type
 of a function.
 
-### TypeVariable use
+### TypeVariable use and constraint solving
 
 TypeVariables do not necessarily need to correspond to another TypeVariable use
 
@@ -76,3 +76,36 @@ In the 1:1 case, the input type is clearly the output type
 In the many to 1 case, the direction of code flow is many inputs, 1 output, so the types are collected into a union.
 In the one to many (and by extension, the one to many to one) case the initial subscripted type is used.
 In the freestanding case, lumi does not assume a direct association between these types, but does still require that there be a type that satisfies the presented constraints.
+
+This becomes clearer when looking at the following python example:
+
+```py
+T = TypeVar("T")
+
+def foo(x: T, y: T) -> T:
+    ...
+
+#vs
+IntStr = TypeVar("IntStr", int, str)
+
+def bar(x: IntStr, y: IntStr):
+    ...
+
+reveal_type(foo(1, "two"))  # Should be int | str or object, depending on inference model
+reveal_type(bar(1, "two"))  # should be rejected at call, there is no type which satisfies these constraints
+```
+
+Of current (2024-06-27) "mainstream, specification participating typecheckers",
+
+mypy and pytype each fail at some part of this this.
+Pyre and pyright get this correct.
+The "Correct" behavior is currently not specified within Cpython.
+
+> Constraint solving can be very costly, so implementations take certain shortcuts and make certain assumptions. These can fail to find certain solutions. I suspect that’s what’s happening in this case for mypy.
+> Constraint solving behaviors are not discussed in the typing spec currently, and I think it will be a long time (if ever) before they are. Spec’ing this behavior would be very difficult as it involves many heuristics, edge cases, behaviors that differ between type checkers, and limitations dictated by internal implementation choices. It also relies on other concepts (like value-constrained TypeVars) that are not yet well spec’ed. If you want to pursue standardization in this space, it will take significant time and effort.
+
+See discussion of the topic [here](https://discuss.python.org/t/constraining-generic-argument-types/56809)
+
+Lumi hs a specified behavior (TODO: definitions this specification depends on need to be mroe rigorous)
+
+Constraints should be solved by analyzing the directional flow of code to determine if there is a set-theoretic type which satisfies the constraints. If so, that's the type, otherwise the code is invalid.
