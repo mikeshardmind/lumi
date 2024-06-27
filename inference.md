@@ -70,9 +70,9 @@ or
 
 - free standing, no clear relation
 
-`(T, T) -> None`
+`def foo (x: T, y: T) -> None`
 
 In the 1:1 case, the input type is clearly the output type
 In the many to 1 case, the direction of code flow is many inputs, 1 output, so the types are collected into a union.
-In the one to many case the initial subscripted type is used.
-In the freestanding case, lumi does not associate these types. This is allowed solely to allow strucutral bounds.
+In the one to many (and by extension, the one to many to one) case the initial subscripted type is used.
+In the freestanding case, lumi does not associate these types. This is allowed solely to state shared constraints.
