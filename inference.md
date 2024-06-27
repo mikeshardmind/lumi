@@ -97,15 +97,22 @@ reveal_type(bar(1, "two"))  # should be rejected at call, there is no type which
 
 Of current (2024-06-27) "mainstream, specification participating typecheckers",
 
-mypy and pytype each fail at some part of this this.
-Pyre and pyright get this correct.
+- mypy and pytype each fail at some part of this this.
+- pyright fails at other examples in the thread this recently arose in (see link below)
+- Pyre gets this correct.
+
+
 The "Correct" behavior is currently not specified within Cpython.
+
 
 > Constraint solving can be very costly, so implementations take certain shortcuts and make certain assumptions. These can fail to find certain solutions. I suspect that’s what’s happening in this case for mypy.
 > Constraint solving behaviors are not discussed in the typing spec currently, and I think it will be a long time (if ever) before they are. Spec’ing this behavior would be very difficult as it involves many heuristics, edge cases, behaviors that differ between type checkers, and limitations dictated by internal implementation choices. It also relies on other concepts (like value-constrained TypeVars) that are not yet well spec’ed. If you want to pursue standardization in this space, it will take significant time and effort.
 
+
 See discussion of the topic [here](https://discuss.python.org/t/constraining-generic-argument-types/56809)
 
-Lumi hs a specified behavior (TODO: definitions this specification depends on need to be mroe rigorous)
+
+Lumi has a specified behavior (TODO: definitions this specification depends on need to be mroe rigorous)
+
 
 Constraints should be solved by analyzing the directional flow of code to determine if there is a set-theoretic type which satisfies the constraints. If so, that's the type, otherwise the code is invalid.
