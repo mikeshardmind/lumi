@@ -77,6 +77,8 @@ C to have a foo that isn't a suitable replacement for either A or B, let alone b
 ### typing features
 
 - Unsafe coercions are not supported by Lumi
+- Lumi's behavior for `async def` de-sugaring may differer from cpython.
+  This depends on which resolution in a currently ongoing disucssion cpython goes with.
 - A few additional tools will exist in lumi to support describing certain kinds of APIs that already exist,
   but cover cases where it may not strictly desirable to support continued development of new code like it.
 
