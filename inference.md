@@ -41,3 +41,38 @@ but {`-`, `/`} are assumed not
 In general, at least one of LHS, RHS, or the resulting type needs to be
 determinable if the result of the operator use would impact the return type
 of a function.
+
+### TypeVariable use
+
+TypeVariables do not necessarily need to correspond to another TypeVariable use
+
+TypeVariables generally can have 4 ways of appearing:
+
+- 1 to 1 ie:
+
+`def foo(x: T) -> T: ...`
+
+- many to 1
+
+`def foo(x: T, y: T) -> T: ...`
+
+- 1 to many
+
+`class Foo[T]: ... # multiple uses of T in body`
+
+or
+
+`def foo[T](x: T, y: T): ...`
+
+(or 1 to many to 1):
+
+`def foo[T](x: T, y: T) -> T: ...`
+
+- free standing, no clear relation
+
+`(T, T) -> None`
+
+In the 1:1 case, the input type is clearly the output type
+In the many to 1 case, the direction of code flow is many inputs, 1 output, so the types are collected into a union.
+In the one to many case the initial subscripted type is used.
+In the freestanding case, lumi does not associate these types. This is allowed solely to allow strucutral bounds.

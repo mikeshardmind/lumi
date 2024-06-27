@@ -8,11 +8,11 @@ Attempts will be made to generate at minimum sensible structural types for pytho
 
 Currently planned:
 
-- Efficient Data only structs
+- Efficient Data only structs (initially to be implemented in python, may change in future)
 - Derived numerical types and refinement types (see numerics.md)
 - Differing overload behavior (see overloads.md)
-- Guard clauses
 - None aware operations (will expand to python code that short circuits on None)
 - Late bound function defaults (will still generate a sentinel, but allows ensuring the
   type system checks that you removed the generated sentinel by not having this exist in your code)
+- Guard clauses
 - ADTs (While planned, this one is more tentatively so)
