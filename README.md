@@ -50,7 +50,7 @@ There are tradeoffs that have to be considered when making decisions at the
 language level, and right now, the balance on some of these issues has been
 to keep certain kinds of unsoundness in favor of stability of existing systems.
 
-I hope this becomes a useful too that people can rely on, and I think it also
+I hope this becomes a useful tool that people can rely on, and I think it also
 can help assist CPython upstream in having another lens to view some of the
 problems in that isn't just academic, but implemented and ready to use.
 

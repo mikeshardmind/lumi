@@ -14,6 +14,13 @@ Lumi *may* at some much later date gain support for generalized algebraic effect
 2. It is an error to declare nominal subtypes which violate concetps of safe substitution (TODO: define safe substitution)
 3. Structural subtyping in Lumi is limited to what is statically provable.
 
+### Denotable types
+
+- All types which can be statically proven should be both expressible and denotable
+- Following from this, Structural types may in some cases only be denotable as type bounds
+- If there are a large number of cases that suffer ergonomically for this,
+  syntax better supporting it should be the answer, not allowing it unsafely or ignoring an ergonomic issue.
+
 ### Exceptions
 
 Most academic work here has not treated Exceptions as control flow or as having values.
