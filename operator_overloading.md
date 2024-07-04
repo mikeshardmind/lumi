@@ -9,5 +9,3 @@ ie. (syntax not final)
 ```
 lumi binop-relation: datetime + timedelta = datetime
 ```
-
-lumi also allows this to be expressed for broadcasting: (TODO)
