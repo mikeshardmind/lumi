@@ -67,6 +67,18 @@ C to have a foo that isn't a suitable replacement for either A or B, let alone b
   with existing python code.
 - Lumi does not allow implementing `__instancecheck__` or `__subclasscheck__`
 
+### ParamSpec + Callable (may need some workshopping of specifics)
+
+- `ParamSpec.copy_params`
+- `ParamSpec.copy_return`
+- `Callable.from_callable`
+
+Useful for generating good expectations of python types Lumi may recieve
+```py
+type TypeConstructor[T] = Callable.from_callable[T]
+```
+forces treating a type T as a callable type constructor with specific expectations
+of input parameters.
 
 ### builtins
 
@@ -82,14 +94,14 @@ C to have a foo that isn't a suitable replacement for either A or B, let alone b
 - A few additional tools will exist in lumi to support describing certain kinds of APIs that already exist,
   but cover cases where it may not strictly desirable to support continued development of new code like it.
 
-Examples: `VarArgsReturnList` and `ReturnedHeterogenousList` (planned)
+Examples: `VarArgsReturnList` (planned)
 
 - This is only allowed in Lumi in cases that do not retain a reference to the returned list
 - CPython code described with this must not mutate the list once it is returned.
 - You are allowed to access each element of it or destructure it on an individual basis, or treat it as a normal list, but not both.
 - If Lumi sees this passed to a non-Lumi function or sees you mutate it, it is not allowed to be treated more similarly to a tuple with known individual elements.
 - Lumi's error messages will reflect where this occured.
-- Lumi allows describing Lumi code with `VarArgsReturnList` but not with `ReturnedHeterogenousList`, the latter exists only for describing existing CPython code. The former must be a "what went in went back out"
+- Lumi allows describing Lumi code with `VarArgsReturnList` only when what goes in is what goes out.
 
 This is a common occurance in various Cpython apis and libraries. The best example of this is `asyncio.gather`
 
