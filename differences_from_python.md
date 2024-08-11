@@ -13,6 +13,14 @@ lumi replaces isinstance with a type-safe implementation that tracks certain thi
 - Lumi will by default disallow unsafe override of behavior.
 - Lumi will allow a directive that says "I want the behavior of this, but am okay with losing it as a supertype" This must be explicitly stated. This results in Lumi generating a new type.
 
+### Hashability
+
+- Lumi knows that object implements hash, and that users are allowed to remove hashability in python.
+- Lumi knows that hash needs to be explicitly defined when eq is defined to retain hashability
+- Lumi requires *explicitly* setting hash to None or defining it when defining equality.
+- Lumi treats removal of hashability as an LSP violation, except if removed in the initial class definition.
+- The addition of hashability is not an LSP violation, an absent hash method is still considered to be Optional
+
 ### Use of super
 
 - (Undecided, requires exploration) Lumi will wither reject all uses or reject unsafe uses of super
