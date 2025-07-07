@@ -64,6 +64,8 @@ problems in that isn't just academic, but implemented and ready to use.
 - Provide a few additional implemented base types
 - For it to be easy to write the correct type.
 - Provide additional syntax supporting the ideas that enable people to write type safe code with less effort.
+- Distinguish between library and application code such that patterns that are safe if not further extended are
+  allowed in code not intended to be further extended.
 
 ## Long term goals
 

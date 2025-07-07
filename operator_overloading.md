@@ -2,7 +2,10 @@
 - Lumi allows operator overloading.
 - Operator overloading is only allowed for types where the relationship has been declared
   implementations of operators will be checked against such declarations.
-
+- Lumi has seperate rules for application code and library code.
+- Lumi allows some amount of ["Type piracy"](https://docs.julialang.org/en/v1/manual/style-guide/#avoid-type-piracy)
+  in application code, but not in library code.
+- Lumi allows for operator implementations that would be unsafe if further extended in application code, but not in library code.
 
 ie. (syntax not final)
 
